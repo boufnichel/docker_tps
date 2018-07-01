@@ -1,0 +1,45 @@
+cd /sys/fs/cgroup
+
+# install cgroup tools
+sudo apt-get install cgroup-bin cgroup-lite libcgroup1 -y
+
+# create a new group with cgcreate tool
+sudo cgcreate -g cpu,memory:tpcgroup
+
+# show memroy limit for the new group
+cat /sys/fs/cgroup/memory/tpcgroup/memory.limit_in_bytes
+
+# edit memroy limit for the new group
+sudo -i
+sudo echo 3G > /sys/fs/cgroup/memory/tpcgroup/memory.limit_in_bytes
+
+# install docker 
+sudo apt-get update
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+sudo apt-get update
+sudo apt-get install docker-ce
+
+
+# pull nginx docker image
+sudo docker pull nginx
+
+# run a container based on the nginx image
+sudo docker run --name nginx-test -d -p 8080:80 nginx
+
+# tape ls
+ls
+
+# what happen !?
+
+
+----------------------- annexe ---------------
+

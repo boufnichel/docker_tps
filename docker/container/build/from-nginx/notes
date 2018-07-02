@@ -1,3 +1,3 @@
-docker build --tag=nginx:lydec .
+docker build --tag=mobof/nginx:lydec .
 docker container cp ecf44ee69d4f:/usr/share/nginx ..
 docker container exec ecf44ee69d4f ls

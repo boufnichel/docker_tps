@@ -1,0 +1,8 @@
+# List images
+docker images 	
+docker image ls
+
+# pull hello world image from docker hub
+docker pull hello-world
+docker history hello-world
+docker rmi hello-world
